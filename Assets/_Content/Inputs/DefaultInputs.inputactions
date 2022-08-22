@@ -1,0 +1,114 @@
+{
+    "name": "DefaultInputs",
+    "maps": [
+        {
+            "name": "InGame",
+            "id": "3b607821-034b-4ad8-9529-9fa41218c1de",
+            "actions": [
+                {
+                    "name": "CameraMoveLeft",
+                    "type": "Value",
+                    "id": "f5df29f8-7db2-4ffb-9dd6-edcae8ff8fa4",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "CameraMoveRight",
+                    "type": "Value",
+                    "id": "0a162f58-6c21-42b3-b36d-ae2e4ddf6678",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "CameraMoveForward",
+                    "type": "Value",
+                    "id": "fb708ce1-9553-463c-8af6-ecb79f4324e0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "CameraMoveBackward",
+                    "type": "Value",
+                    "id": "8d9413d3-b4ab-4d66-a2ac-97ca8f0eed0e",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "CameraZoom",
+                    "type": "Value",
+                    "id": "0d76708f-c4c4-4623-b7d2-562855924127",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fb3c52f5-b792-45ec-85ef-140208a007b9",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2de261a6-7562-41ec-bbab-c27ecad6bcf9",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMoveRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "50ab64a8-45ec-4261-97c5-65f6f1b1c339",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMoveBackward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51ba2541-daa1-448e-9437-1b93c0e96034",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab807751-7690-4d6a-a01e-dfc2cc464c1d",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMoveForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
