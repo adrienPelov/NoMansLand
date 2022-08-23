@@ -47,9 +47,8 @@ public class Grid : MonoBehaviour
 	}
     [SerializeField]
     private List<List<Cell>> m_cells;
-
-    // Start is called before the first frame update
-    void Start()
+    
+	void Start()
     {
         GenerateGrid();
     }
@@ -62,7 +61,12 @@ public class Grid : MonoBehaviour
 
     public void GenerateGrid()
 	{
-        if(m_cellPrefab)
+        if(m_cells == null)
+		{
+            m_cells = new List<List<Cell>>();
+        }
+
+        if(m_cellPrefab && m_cells.Count == 0)
 		{
             FlushGrid();
 
@@ -104,6 +108,8 @@ public class Grid : MonoBehaviour
 		{
             DestroyImmediate(transform.GetChild(i).gameObject);
 		}
+
+        m_cells.Clear();
 	}
 
     public Vector3 GetGridCenter()

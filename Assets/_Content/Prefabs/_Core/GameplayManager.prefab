@@ -46,7 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653f7b42d72852a45a5de8a53d8e40bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_grid: {fileID: 0}
   m_camera: {fileID: 0}
+  m_unitSettings: {fileID: 11400000, guid: 6969ddd50aa984c4c9f4ee6b14702206, type: 2}
 --- !u!114 &2717615444375819518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +61,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995abac3888bd874bbdef806dcc134e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_bisMovingLeft: 0
+  m_bisMovingRight: 0
+  m_bisMovingForward: 0
+  m_bisMovingBackward: 0
 --- !u!114 &5692806306257045213
 MonoBehaviour:
   m_ObjectHideFlags: 0

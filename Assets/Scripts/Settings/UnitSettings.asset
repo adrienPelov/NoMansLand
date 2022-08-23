@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c79d3e0dec9bc4399d219afbd073f2, type: 3}
+  m_Name: UnitSettings
+  m_EditorClassIdentifier: 
+  m_unitsData:
+  - Type: 0
+    Prefab: {fileID: 0}
+    Nemesis: 1
+    Victim: 2
+    Stats:
+      HP: 2
+      Defense: 0
+      Damage: 2
+      Movement: 4
+      Cost: 1
+  - Type: 2
+    Prefab: {fileID: 0}
+    Nemesis: 0
+    Victim: 3
+    Stats:
+      HP: 5
+      Defense: 0
+      Damage: 2
+      Movement: 3
+      Cost: 2
+  - Type: 3
+    Prefab: {fileID: 0}
+    Nemesis: 2
+    Victim: 1
+    Stats:
+      HP: 3
+      Defense: 0
+      Damage: 2
+      Movement: 2
+      Cost: 2
+  - Type: 1
+    Prefab: {fileID: 0}
+    Nemesis: 3
+    Victim: 0
+    Stats:
+      HP: 4
+      Defense: 0
+      Damage: 2
+      Movement: 3
+      Cost: 2

@@ -11,6 +11,7 @@ public enum GameState
 
 public class GameplayManager : MonoBehaviour
 {
+    [Header("Cached Variables")]
     private static GameplayManager s_instance;
     public static GameplayManager Instance
 	{
@@ -46,6 +47,17 @@ public class GameplayManager : MonoBehaviour
         get
 		{
             return m_camera;
+		}
+	}
+
+    [Header("Settings")]
+    [SerializeField]
+    private UnitSettings m_unitSettings;
+    public UnitSettings UnitSettings
+	{
+        get
+		{
+            return m_unitSettings;
 		}
 	}
 

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_movementSpeed: 10
-  m_movementStep: 25
+  m_movementStep: 15
   m_zoomSpeed: 10
   m_zoomMin: 1
   m_zoomMax: 25
