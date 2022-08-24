@@ -5,6 +5,11 @@ using UnityEngine.InputSystem;
 
 public class InputsController : MonoBehaviour
 {
+	#region Variables
+	////////////////////////
+	/// Variables
+	////////////////////////
+	
 	[SerializeField]
 	private bool m_bisMovingLeft = false;
 	[SerializeField]
@@ -13,6 +18,13 @@ public class InputsController : MonoBehaviour
 	private bool m_bisMovingForward = false;
 	[SerializeField]
 	private bool m_bisMovingBackward = false;
+
+	#endregion
+
+	#region Unity Methods
+	////////////////////////
+	/// Unity Methods
+	////////////////////////
 
 	private void Update()
 	{
@@ -38,9 +50,16 @@ public class InputsController : MonoBehaviour
 			movement.y -= 1f;
 		}
 
-		GameplayManager.Instance.GameCamera.UpdateMovement(movement);
+		GameplayManager.Instance.GameCamera.OnMovement(movement);
 	}
 
+	#endregion
+
+	#region Class Methods
+	////////////////////////
+	/// Class Methods
+	////////////////////////
+	
 	public void OnCameraMoveLeft(InputValue _input)
 	{
 		m_bisMovingLeft = _input.Get<float>() == 1f;
@@ -65,4 +84,52 @@ public class InputsController : MonoBehaviour
 	{
 		GameplayManager.Instance.GameCamera.OnZoom(_input.Get<float>());
 	}
+
+	public void OnSelect(InputValue _input)
+	{
+		Vector2 mousePosition = Mouse.current.position.ReadValue();
+		Vector3 rayOrigin = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.transform.position.y));
+		RaycastHit[] hits = Physics.RaycastAll(rayOrigin + Vector3.up * 10f , Vector3.up * -1f, 30f);
+
+		if (hits.Length > 0)
+		{
+			Unit selectedUnit = null;
+			Cell selectedCell = null;
+
+			foreach (RaycastHit hit in hits)
+			{
+				GameObject hitObject = hit.transform.gameObject;
+				selectedUnit = hitObject.GetComponentInChildren<Unit>();
+				selectedCell = hitObject.GetComponentInChildren<Cell>();
+			}
+
+			// Select Unit
+			if (selectedUnit != null)
+			{
+				GameplayManager.Instance.UnitsManager.OnUnitSelected(selectedUnit);
+			}
+			// Try Moving Unit
+			else if(selectedCell)
+			{
+				GameplayManager.Instance.UnitsManager.TryMoveToCell(selectedCell);
+			}
+			// Nothing
+			else
+			{
+				GameplayManager.Instance.UnitsManager.OnNoUnitSelected();
+			}
+		}
+	}
+
+	public void OnRotateUnitLeft(InputValue _input)
+	{
+		GameplayManager.Instance.UnitsManager.TryRotateLeft();
+	}
+
+	public void OnRotateUnitRight(InputValue _input)
+	{
+		GameplayManager.Instance.UnitsManager.TryRotateRight();
+	}
+
+	#endregion
 }

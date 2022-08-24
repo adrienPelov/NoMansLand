@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
+    #region Variables
+    ////////////////////////
+    /// Variables
+    ////////////////////////
+    
     [Header("Grid Settings")]
     [SerializeField]
     private int m_width;
@@ -23,15 +28,6 @@ public class Grid : MonoBehaviour
             return m_height;
 		}
 	}
-    [SerializeField]
-    private int m_cellHP;
-    public int CellHP
-	{
-        get
-		{
-            return m_cellHP;
-		}
-	}
 
     [Header("Cached Variables")]
     [SerializeField]
@@ -47,8 +43,15 @@ public class Grid : MonoBehaviour
 	}
     [SerializeField]
     private List<List<Cell>> m_cells;
-    
-	void Start()
+
+    #endregion
+
+    #region Unity Methods
+    ////////////////////////
+    /// Unity Methods
+    ////////////////////////
+
+    void Start()
     {
         GenerateGrid();
     }
@@ -59,6 +62,13 @@ public class Grid : MonoBehaviour
         
     }
 
+    #endregion
+
+    #region Class Methods
+    ////////////////////////
+    /// Class Methods
+    ////////////////////////
+    
     public void GenerateGrid()
 	{
         if(m_cells == null)
@@ -121,4 +131,6 @@ public class Grid : MonoBehaviour
 
         return Vector3.zero;
 	}
+
+    #endregion
 }

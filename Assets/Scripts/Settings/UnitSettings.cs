@@ -16,7 +16,28 @@ public struct UnitData
 
 public class UnitSettings : ScriptableObject
 {
-	public UnitData[] m_unitsData;
+	[SerializeField]
+	private Color m_unitColorDefault;
+	public Color UnitColorDefault
+	{
+		get
+		{
+			return m_unitColorDefault;
+		}
+	}
+
+	[SerializeField]
+	private Color m_unitColorSelected;
+	public Color UnitColorSelected
+	{
+		get
+		{
+			return m_unitColorSelected;
+		}
+	}
+
+	[SerializeField]
+	private UnitData[] m_unitsData;
 
 	public UnitData GetUnitData(UnitType _type)
 	{

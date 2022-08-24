@@ -7,7 +7,8 @@ public enum CellType
     Plains = 0,
     Forest = 1,
     Mountain = 2,
-    NoMansLand = 3
+    NoMansLand = 3,
+    Building = 4
 }
 
 public enum CellState
@@ -20,6 +21,11 @@ public enum CellState
 
 public class Cell : MonoBehaviour
 {
+    #region Variables
+    ////////////////////////
+    /// Variables
+    ////////////////////////
+    
     [Header("Settings")]
     [SerializeField]
     private CellType m_type;
@@ -67,18 +73,30 @@ public class Cell : MonoBehaviour
     [SerializeField]
     private SpriteRenderer m_rendererBorder;
 
-    // Start is called before the first frame update
+    #endregion
+
+    #region Unity Methods
+    ////////////////////////
+    /// Unity Methods
+    ////////////////////////
+
     void Start()
     {
         InitCell();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
+    #endregion
+
+    #region Class Methods
+    ////////////////////////
+    /// Class Methods
+    ////////////////////////
+    
     public void SetCoordinates(int _row, int _column)
 	{
         m_row = _row;
@@ -87,7 +105,7 @@ public class Cell : MonoBehaviour
 
     private void InitCell()
 	{
-        m_hp = GameplayManager.Instance.Grid.CellHP;
+        m_hp = m_settings.CellHP;
         m_state = CellState.Default;
 	}
 
@@ -120,4 +138,6 @@ public class Cell : MonoBehaviour
             }
         }
 	}
+
+    #endregion
 }

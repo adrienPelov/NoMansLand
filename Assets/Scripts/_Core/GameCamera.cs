@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GameCamera : MonoBehaviour
 {
+    #region Variables
+    ////////////////////////
+    /// Variables
+    ////////////////////////
+    
     [Header("Settings")]
     [SerializeField]
     private float m_movementSpeed = 50f;
@@ -24,18 +29,39 @@ public class GameCamera : MonoBehaviour
     [SerializeField]
     private float m_targetHeight;
 
-    // Start is called before the first frame update
+    #endregion
+
+    #region Unity Methods
+    ////////////////////////
+    /// Unity Methods
+    ////////////////////////
+
     void Start()
     {
         InitCamera();
     }
 
-    // Update is called once per frame
-    void UpdateCamera()
+    private void Update()
     {
-        UpdateCamera();
+        Vector3 newPosition = transform.position;
+
+        // Zoom
+        newPosition.y = Mathf.Lerp(newPosition.y, m_targetHeight, Time.deltaTime * m_zoomSpeed);
+
+        // Position
+        newPosition.x = Mathf.Lerp(newPosition.x, m_targetPosition.x, Time.deltaTime * m_movementSpeed);
+        newPosition.z = Mathf.Lerp(newPosition.z, m_targetPosition.y, Time.deltaTime * m_movementSpeed);
+
+        transform.position = newPosition;
     }
 
+    #endregion
+
+    #region Class Methods
+    ////////////////////////
+    /// Class Methods
+    ////////////////////////
+    
     private void InitCamera()
 	{
         m_targetHeight = m_zoomMax;
@@ -52,22 +78,10 @@ public class GameCamera : MonoBehaviour
         }
     }
 
-    public void UpdateMovement(Vector2 _direction)
+    public void OnMovement(Vector2 _direction)
     {
         m_targetPosition += _direction * m_movementStep * Time.deltaTime;
     }
 
-    private void Update()
-    {
-        Vector3 newPosition = transform.position;
-
-        // Zoom
-        newPosition.y = Mathf.Lerp(newPosition.y, m_targetHeight, Time.deltaTime * m_zoomSpeed);
-
-        // Position
-        newPosition.x = Mathf.Lerp(newPosition.x, m_targetPosition.x, Time.deltaTime * m_movementSpeed);
-        newPosition.z = Mathf.Lerp(newPosition.z, m_targetPosition.y, Time.deltaTime * m_movementSpeed);
-
-        transform.position = newPosition;
-    }
+    #endregion
 }

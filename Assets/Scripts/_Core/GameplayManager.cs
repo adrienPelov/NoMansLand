@@ -11,6 +11,32 @@ public enum GameState
 
 public class GameplayManager : MonoBehaviour
 {
+    #region Variables
+    ////////////////////////
+    /// Variables
+    ////////////////////////
+    
+    [Header("Setup")]
+    [SerializeField]
+    private Grid m_grid;
+    public Grid Grid
+    {
+        get
+        {
+            return m_grid;
+        }
+    }
+
+    [SerializeField]
+    private UnitsManager m_unitsManager;
+    public UnitsManager UnitsManager
+	{
+        get
+		{
+            return m_unitsManager;
+		}
+	}
+
     [Header("Cached Variables")]
     private static GameplayManager s_instance;
     public static GameplayManager Instance
@@ -31,16 +57,6 @@ public class GameplayManager : MonoBehaviour
 	}
 
     [SerializeField]
-    private Grid m_grid;
-    public Grid Grid
-	{
-        get
-		{
-            return m_grid;
-		}
-	}
-
-    [SerializeField]
     private GameCamera m_camera;
     public GameCamera GameCamera
 	{
@@ -50,16 +66,12 @@ public class GameplayManager : MonoBehaviour
 		}
 	}
 
-    [Header("Settings")]
-    [SerializeField]
-    private UnitSettings m_unitSettings;
-    public UnitSettings UnitSettings
-	{
-        get
-		{
-            return m_unitSettings;
-		}
-	}
+    #endregion
+
+    #region Unity Methods
+    ////////////////////////
+    /// Unity Methods
+    ////////////////////////
 
     void Awake()
     {
@@ -76,6 +88,13 @@ public class GameplayManager : MonoBehaviour
         
     }
 
+    #endregion
+
+    #region Class Methods
+    ////////////////////////
+    /// Class Methods
+    ////////////////////////
+    
     private void SetState(GameState _newState)
 	{
         m_state = _newState;
@@ -116,4 +135,6 @@ public class GameplayManager : MonoBehaviour
 	{
 
 	}
+
+    #endregion
 }

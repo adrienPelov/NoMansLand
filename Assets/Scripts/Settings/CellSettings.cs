@@ -6,6 +6,16 @@ using UnityEngine.UI;
 public class CellSettings : ScriptableObject
 {
 	[SerializeField]
+	private int m_cellHP;
+	public int CellHP
+	{
+		get
+		{
+			return m_cellHP;
+		}
+	}
+
+	[SerializeField]
     private Color m_colorTypePlains;
     public Color ColorTypePlains
 	{

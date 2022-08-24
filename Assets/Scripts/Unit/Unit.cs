@@ -22,6 +22,11 @@ public struct UnitStats
 
 public class Unit : MonoBehaviour
 {
+    #region Variables
+    ////////////////////////
+    /// Variables
+    ////////////////////////
+    
     [Header("Settings")]
     [SerializeField]
     private UnitType m_type;
@@ -73,25 +78,53 @@ public class Unit : MonoBehaviour
 		}
 	}
 
-    // Start is called before the first frame update
+    [SerializeField]
+    private SpriteRenderer m_rendererFill;
+    [SerializeField]
+    private SpriteRenderer m_rendererSelection;
+
+    #endregion
+
+    #region Unity Methods
+    ////////////////////////
+    /// Unity Methods
+    ////////////////////////
+
     void Start()
     {
-        InitUnit(GameplayManager.Instance.UnitSettings.GetUnitData(m_type));
+        InitUnit(GameplayManager.Instance.UnitsManager.UnitSettings.GetUnitData(m_type));
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
+    #endregion
+
+    #region Class Methods
+    ////////////////////////
+    /// Class Methods
+    ////////////////////////
+    
     public void InitUnit(UnitData _data)
 	{
         m_stats = _data.Stats;
-	}
+        m_rendererSelection.color = GameplayManager.Instance.UnitsManager.UnitSettings.UnitColorDefault;
+    }
 
-	private void OnTriggerEnter(Collider _other)
+    public void SelectUnit(bool _bSelect)
 	{
-       
-	}
+        if(_bSelect)
+		{
+            m_rendererSelection.color = GameplayManager.Instance.UnitsManager.UnitSettings.UnitColorSelected;
+
+        }
+        else
+		{
+            m_rendererSelection.color = GameplayManager.Instance.UnitsManager.UnitSettings.UnitColorDefault;
+        }
+    }
+
+    #endregion
 }
