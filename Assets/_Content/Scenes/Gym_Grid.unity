@@ -694,6 +694,7 @@ MonoBehaviour:
   m_influenceRoot: {fileID: 2106384309}
   m_influenceRenderers: []
   m_influenceColliders: []
+  m_influencedCells: []
 --- !u!4 &1045797345
 Transform:
   m_ObjectHideFlags: 0
@@ -1243,13 +1244,14 @@ MonoBehaviour:
     Damage: 0
     Movement: 0
     Cost: 0
-  m_playerID: 1
+  m_playerID: 2
   m_currentCell: {fileID: 0}
   m_rendererFill: {fileID: 209612543}
   m_rendererSelection: {fileID: 1449443501}
   m_influenceRoot: {fileID: 1933415013}
   m_influenceRenderers: []
   m_influenceColliders: []
+  m_influencedCells: []
 --- !u!4 &1596285118
 Transform:
   m_ObjectHideFlags: 0
