@@ -79,6 +79,7 @@ public class UnitsManager : MonoBehaviour
         if(m_selectedUnit)
 		{
             m_selectedUnit.transform.position = _cell.transform.position;
+            m_selectedUnit.OnMovedToCell(_cell);
 		}
 
         OnNoUnitSelected();

@@ -100,6 +100,7 @@ public class Grid : MonoBehaviour
                     newCell.transform.position = new Vector3(m_cellSize * (j + 0.5f), 0f, m_cellSize * (i + 0.5f));
                     newCell.transform.rotation = Quaternion.identity;
                     newCell.transform.parent = this.transform;
+                    newCell.gameObject.name = "Cell_" + i + "_" + j;
 
                     Cell newCellScript = newCell.GetComponentInChildren<Cell>();
                     newCellScript.SetCoordinates(i, j);

@@ -56,6 +56,9 @@ public class Cell : MonoBehaviour
     private int m_column;
 
     [SerializeField]
+    private List<int> m_influencePlayerIDs;
+
+    [SerializeField]
     private CellSettings m_settings;
 
     [SerializeField]
@@ -107,7 +110,9 @@ public class Cell : MonoBehaviour
 	{
         m_hp = m_settings.CellHP;
         m_state = CellState.Default;
-	}
+        m_influencePlayerIDs = new List<int>();
+
+    }
 
     public void UpdateCellColor()
 	{
@@ -138,6 +143,56 @@ public class Cell : MonoBehaviour
             }
         }
 	}
+
+    private void SetState(CellState _newState)
+	{
+        m_state = _newState;
+
+        Debug.Log("Cell_[" + m_row + "][" + m_column + "] -> new State: " + _newState);
+
+        switch (_newState)
+        {
+            default:
+			{
+                break;
+			}
+        }
+	}
+
+    public void OnInfluenceStart(int _playerID)
+	{
+        if (!m_influencePlayerIDs.Contains(_playerID))
+        {
+            m_influencePlayerIDs.Add(_playerID);
+
+            if (m_influencePlayerIDs.Count > 1)
+            {
+                SetState(CellState.Contested);
+            }
+            else
+            {
+                SetState(CellState.Influenced);
+            }
+        }
+	}
+
+    public void OnInfluenceStop(int _playerID)
+	{
+        m_influencePlayerIDs.Remove(_playerID);
+
+        if (m_influencePlayerIDs.Count > 1)
+        {
+            SetState(CellState.Contested);
+        }
+        else if (m_influencePlayerIDs.Count == 1)
+        {
+            SetState(CellState.Influenced);
+        }
+        else
+		{
+            SetState(CellState.Default);
+        }
+    }
 
     #endregion
 }

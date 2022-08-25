@@ -27,18 +27,16 @@ public class Unit : MonoBehaviour
     /// Variables
     ////////////////////////
     
-    [Header("Settings")]
+    [Header("Cached Variables")]
     [SerializeField]
     private UnitType m_type;
     public UnitType Type
-	{
+    {
         get
-		{
+        {
             return m_type;
-		}
-	}
-
-    [Header("Cached Variables")]
+        }
+    }
     [SerializeField]
     private UnitType m_nemesis;
     public UnitType Nemesis
@@ -69,6 +67,16 @@ public class Unit : MonoBehaviour
 	}
 
     [SerializeField]
+    private int m_playerID;
+    public int PlayerID
+	{
+        get
+		{
+            return m_playerID;
+		}
+	}
+
+    [SerializeField]
     private Cell m_currentCell;
     public Cell CurrentCell
 	{
@@ -82,6 +90,14 @@ public class Unit : MonoBehaviour
     private SpriteRenderer m_rendererFill;
     [SerializeField]
     private SpriteRenderer m_rendererSelection;
+    [SerializeField]
+    private GameObject m_influenceRoot;
+    [SerializeField]
+    private List<SpriteRenderer> m_influenceRenderers;
+    [SerializeField]
+    private List<BoxCollider> m_influenceColliders;
+    [SerializeField]
+    private List<Cell> m_influencedCells;
 
     #endregion
 
@@ -111,6 +127,25 @@ public class Unit : MonoBehaviour
 	{
         m_stats = _data.Stats;
         m_rendererSelection.color = GameplayManager.Instance.UnitsManager.UnitSettings.UnitColorDefault;
+        m_rendererFill.color = GameplayManager.Instance.UnitsManager.UnitSettings.UnitColorPlayers[m_playerID - 1];
+
+        m_influenceRenderers = new List<SpriteRenderer>();
+        m_influenceColliders = new List<BoxCollider>();
+        m_influencedCells = new List<Cell>();
+
+        for(int i = 0; i < m_influenceRoot.transform.childCount; i++)
+		{
+            SpriteRenderer newRenderer = m_influenceRoot.transform.GetChild(i).gameObject.GetComponentInChildren<SpriteRenderer>();
+
+            if(newRenderer)
+			{
+                Color newColor = GameplayManager.Instance.UnitsManager.UnitSettings.UnitColorPlayers[m_playerID - 1];
+                newColor.a = GameplayManager.Instance.UnitsManager.UnitSettings.InfluenceColorAlpha;
+                newRenderer.color = newColor;
+                m_influenceRenderers.Add(newRenderer);
+                m_influenceColliders.Add(m_influenceRoot.transform.GetChild(i).gameObject.GetComponentInChildren<BoxCollider>());
+            }
+		}
     }
 
     public void SelectUnit(bool _bSelect)
@@ -123,6 +158,42 @@ public class Unit : MonoBehaviour
         else
 		{
             m_rendererSelection.color = GameplayManager.Instance.UnitsManager.UnitSettings.UnitColorDefault;
+        }
+    }
+
+    public void OnMovedToCell(Cell _cell)
+	{
+        m_currentCell = _cell;
+        UpdateInfluence();
+	}
+
+    private void UpdateInfluence()
+	{
+        foreach(Cell cell in m_influencedCells)
+		{
+            cell.OnInfluenceStop(m_playerID);
+		}
+
+        m_influencedCells.Clear();
+
+        foreach(BoxCollider collider in m_influenceColliders)
+		{
+            RaycastHit[] hits = Physics.BoxCastAll(collider.transform.position, collider.bounds.extents, -1f * Vector3.up, collider.transform.rotation);
+
+            foreach(RaycastHit hit in hits)
+			{
+                Cell influencedCell = hit.transform.GetComponentInChildren<Cell>();
+                if(influencedCell)
+				{
+                    m_influencedCells.Add(influencedCell);
+                    Debug.Log("Influencing Cell: " + influencedCell.gameObject.name);
+				}
+			}
+		}
+
+        foreach (Cell cell in m_influencedCells)
+        {
+            cell.OnInfluenceStart(m_playerID);
         }
     }
 

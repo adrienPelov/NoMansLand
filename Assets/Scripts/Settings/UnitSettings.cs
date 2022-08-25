@@ -17,6 +17,26 @@ public struct UnitData
 public class UnitSettings : ScriptableObject
 {
 	[SerializeField]
+	private Color[] m_unitColorPlayers;
+	public Color[] UnitColorPlayers
+	{
+		get
+		{
+			return m_unitColorPlayers;
+		}
+	}
+
+	[SerializeField]
+	private float m_influenceColorAlpha = 0.25f;
+	public float InfluenceColorAlpha
+	{
+		get
+		{
+			return m_influenceColorAlpha;
+		}
+	}
+
+	[SerializeField]
 	private Color m_unitColorDefault;
 	public Color UnitColorDefault
 	{
